@@ -1,0 +1,10 @@
+python38.zip
+.
+..
+../downscale
+../mapinv
+../prepgrid
+../prepmodel
+
+# Uncomment to run site.main() automatically
+import site

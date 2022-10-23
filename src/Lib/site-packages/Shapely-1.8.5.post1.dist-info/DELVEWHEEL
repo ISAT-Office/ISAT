@@ -1,0 +1,3 @@
+1.0.1
+
+['C:\\Users\\runneradmin\\AppData\\Local\\Temp\\cibw-run-x0kl5roy\\cp38-win_amd64\\build\\venv\\Scripts\\delvewheel', 'repair', '--add-path', 'D:\\a\\_temp\\geos-3.10.3\\bin', '-w', 'C:\\Users\\runneradmin\\AppData\\Local\\Temp\\cibw-run-x0kl5roy\\cp38-win_amd64\\repaired_wheel', 'C:\\Users\\runneradmin\\AppData\\Local\\Temp\\cibw-run-x0kl5roy\\cp38-win_amd64\\built_wheel\\Shapely-1.8.5.post1-cp38-cp38-win_amd64.whl']
