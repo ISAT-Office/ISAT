@@ -1,0 +1,3 @@
+[console_scripts]
+pyarmor = pyarmor.pyarmor:main_entry
+
