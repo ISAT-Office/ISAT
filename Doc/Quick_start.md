@@ -159,7 +159,7 @@ finish
 
 输出结果的可视化可以直接通过`*.shp`文件来实现，如图所示为此次运行所绘制的网格。
 
-<img src="C:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20221124153414631.png" alt="image-20221124153414631" style="zoom:67%;" />
+<img src="fig/网格示意图.png" alt="网格示意图" style="zoom:80%;" />
 
 ## Step 2：降尺度排放清单
 
