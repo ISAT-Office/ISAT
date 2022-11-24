@@ -57,3 +57,6 @@ ISAT(Inventory Spatial Allocate Tool，排放清单空间分配工具)是基于�
 
 (13) 王人洁, 王堃等. 中国国道和省道机动车尾气排放特征[J]. 环境科学, 2017, 38(9):8.
 
+(14) Wang H, Liu Z, Zhang Y, et al. Impact of different urban canopy models on air quality simulation in Chengdu, southwestern China[J]. Atmospheric Environment, 2021, 267: 118775.
+
+(15) Wang H, Liu Z, Zhang Y, et al. Impact of urbanization on meteorology and air quality in Chengdu, a basin city of southwestern China[J]. Frontiers in Ecology and Evolution, 490.
