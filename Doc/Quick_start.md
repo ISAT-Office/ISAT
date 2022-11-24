@@ -65,7 +65,7 @@ model_clip:1,1,1
 
 [projection]
 
-**lat1, lat2:** 标准纬度1 ($true_lat1)和标准纬度2 ($true_lat2)
+**lat1, lat2:** 标准纬度1和标准纬度2。**此参数将被用于WRF模型namelist.wps中的`TRUELAT1`和`TRUELAT2`**。
 
 [domain]
 
@@ -225,3 +225,64 @@ method:area,road,pop
 如图所示是不同`ratio`下的清单分配结果。
 
 <img src="fig/不同ratio下的降尺度结果.png" alt="不同ratio下的降尺度结果" style="zoom:67%;" />
+
+## Step 3：准备可以直接输入CMAQ的排放清单文件
+
+### Step 3.1 面源清单建立
+
+此部分采用`prepmodel`进行。
+
+首先进入`area_inlinenew.exe`可执行程序所在目录，然后配置`par.ini`文件。
+
+```ini
+#
+#   ISAT.M
+#
+[runtime]
+runtime:720
+[gridcro2d]
+gridcro2d: ./src/met/GRIDCRO2D_3km
+[speciate]
+speciate: ./src/speciate/speciate_AR.csv,./src/speciate/speciate_AG.csv,./src/speciate/speciate_TR.csv
+#speciate_groups:./src/speciate/speciate_PP.csv,./src/speciate/speciate_BL.csv,./src/speciate/speciate_CE.csv,./src/speciate/speciate_CO.csv,./src/speciate/speciate_IS.csv,./src/speciate/speciate_NH.csv,./src/speciate/speciate_PT.csv,./src/speciate/speciate_SI.csv,./src/speciate/speciate_VO.csv,./src/speciate/speciate_VP.csv,./src/speciate/speciate_VU.csv,./src/speciate/speciate_CPMO.csv,./src/speciate/speciate_CPMI.csv,./src/speciate/speciate_AL.csv,./src/speciate/speciate_YL.csv,./src/speciate/speciate_GL.csv,./src/speciate/speciate_BK.csv,./src/speciate/speciate_HS.csv,./src/speciate/speciate_LM.csv,./src/speciate/speciate_RM.csv
+[temporary]
+#energy,point,area,mobile,flat
+temporary_hour : ./src/temporary/hourly.csv
+temporary_week : ./src/temporary/weekly.csv
+temporary_month: ./src/temporary/monthly.csv
+[emissions]
+emissions: ./src/emissions/3kmMY/AR.csv,./src/emissions/3kmMY/AG.csv,./src/emissions/3kmMY/TR.csv
+#stack_groups: ./src/emissions/WK/STACK_GROUP_PP.csv,./src/emissions/WK/STACK_GROUP_BL.csv,./src/emissions/WK/STACK_GROUP_CE.csv,./src/emissions/WK/STACK_GROUP_CO.csv,./src/emissions/WK/STACK_GROUP_IS.csv,./src/emissions/WK/STACK_GROUP_NH.csv,./src/emissions/WK/STACK_GROUP_PT.csv,./src/emissions/WK/STACK_GROUP_SI.csv,./src/emissions/WK/STACK_GROUP_VO.csv,./src/emissions/WK/STACK_GROUP_VP.csv,./src/emissions/WK/STACK_GROUP_VU.csv,./src/emissions/WK/STACK_GROUP_CPMO.csv,./src/emissions/WK/STACK_GROUP_CPMI.csv,./src/emissions/WK/STACK_GROUP_AL.csv,./src/emissions/WK/STACK_GROUP_YL.csv,./src/emissions/WK/STACK_GROUP_GL.csv,./src/emissions/WK/STACK_GROUP_BK.csv,./src/emissions/WK/STACK_GROUP_HS.csv,./src/emissions/WK/STACK_GROUP_LM.csv,./src/emissions/WK/STACK_GROUP_RM.csv
+```
+
+`par.ini`参数说明：
+
+---------------------
+
+**runtime**: 清单的时间长度，单位小时。
+
+**gridcro2d**：GRIDCRO2D文件路径。
+
+**speciate**：物种分配谱文件所在路径。
+
+**temporary_hour** : 一天内逐小时时间分配谱文件路径。
+
+**temporary_week** : 一周内逐日时间分配谱文件路径。
+
+**temporary_month**: 一年内逐月时间分配谱文件路径。
+
+**emissions**：***Step 2***的输出文件所在路径，需要与**物种分配文件**呈一一对应关系。
+
+---------------------------------
+
+配置`par.ini`文件以后，在终端中输入以下命令开始运行。
+
+```shell
+./area_inlinenew.exe
+```
+
+如果程序没有出现报错则说明运行成功。
+
+### Step 3.2 点源清单建立
+
+点源采用inline清单格式可用于CMAQ以及CAMx。该部分相较于以往模块没有大的改动，主要改动在于只要更改物种分配谱之后就可以更改整个模型的物种分配过程，无需改动代码内部的相关信息。主要使用步骤与之前版本没有差异。
