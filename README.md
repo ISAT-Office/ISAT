@@ -25,8 +25,6 @@ ISAT(Inventory Spatial Allocate Tool，排放清单空间分配工具)是基于�
 
 ***北京市科学技术研究院城市安全与环境科学研究所   王堃  （wkty@mail.bnu.edu.cn）***
 
-
-
 ## 引用
 
 **欢迎引用、讨论作者及所在团队相关论文**：
