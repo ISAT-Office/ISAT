@@ -1,0 +1,19 @@
+__all__ = ['ncf2humidity']
+__doc__ = """
+.. _Write
+:mod:`Write` -- CAMx humidity  writer
+============================================
+
+.. module:: Write
+   :platform: Unix, Windows
+   :synopsis: Provides :ref:`PseudoNetCDF` writer for CAMx
+              humidity files.  See PseudoNetCDF.sci_var.PseudoNetCDFFile
+              for interface details
+.. moduleauthor:: Barron Henderson <barronh@unc.edu>
+"""
+
+from PseudoNetCDF.camxfiles.one3d.Write import ncf2one3d as ncf2humidity
+
+from PseudoNetCDF._getwriter import registerwriter
+registerwriter('camxfiles.humidity', ncf2humidity)
+registerwriter('humidity', ncf2humidity)

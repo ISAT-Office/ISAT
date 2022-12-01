@@ -1,0 +1,7 @@
+#!I:\ISAT-2022\ISAT_code\ISATv2020final\src\python.exe
+from PseudoNetCDF.pncview import main
+import warnings
+
+
+warnings.warn('pncview is deprecated; use pncview.py', DeprecationWarning)
+main()

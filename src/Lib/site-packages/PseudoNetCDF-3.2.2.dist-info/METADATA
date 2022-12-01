@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: PseudoNetCDF
+Version: 3.2.2
+Summary: Like NetCDF and NCO, but works with NetCDF and other scientific formats.
+Home-page: http://github.com/barronh/pseudonetcdf/
+Author: Barron Henderson
+Author-email: barronh@gmail.com
+Maintainer: Barron Henderson
+Maintainer-email: barronh@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Atmospheric Science
+License-File: LICENSE
+Requires-Dist: numpy (>=1.2)
+Requires-Dist: netCDF4
+Requires-Dist: scipy
+Requires-Dist: matplotlib
+Requires-Dist: pyyaml
+Requires-Dist: pandas
+Requires-Dist: importlib-metadata
+Provides-Extra: mapping
+Requires-Dist: basemap ; extra == 'mapping'
+Provides-Extra: projections
+Requires-Dist: pyproj ; extra == 'projections'
+Provides-Extra: textfiles
+Requires-Dist: pandas ; extra == 'textfiles'
+
+NetCDF, NCO, and CDO are fantastic softwares that I use,
+emulate, and admire. The primary drawbacks are restrictions on which
+scientific data sources they will and won't work with, and what types
+of operations they will and won't do. PseudoNetCDF was originally just
+a NetCDF-like interface for many data formats, but has grown to include
+many functionalities from NCO and CDO. This is a platform independent,
+easy to install software to make scientific data manipulation easy.
+
