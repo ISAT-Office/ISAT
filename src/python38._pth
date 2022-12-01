@@ -1,10 +1,11 @@
 python38.zip
 .
 ..
-../downscale
-../mapinv
-../prepgrid
-../prepmodel
+../downscale/
+../mapinv/
+../prepgrid/
+../prepmodel/
+../cmaqprofile/
 
 # Uncomment to run site.main() automatically
 import site
