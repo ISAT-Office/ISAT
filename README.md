@@ -15,7 +15,7 @@ ISAT(Inventory Spatial Allocate Tool，排放清单空间分配工具)是基于�
 ### 2022年12月1日更新：
 
 1. 延长公开使用时间至2023年12月1日。
-2. 增加[面源清单的inline垂直分配工具](cmaqprofile)。
+2. 增加[面源清单的offline垂直分配工具](cmaqprofile)。
 
 ## 使用手册
 
@@ -23,7 +23,7 @@ ISAT(Inventory Spatial Allocate Tool，排放清单空间分配工具)是基于�
 * [物种分配文件修改]():
 * [时间分配文件修改]():
 * [自定义空间分配因子文件]():
-* [面源清单的inline垂直分配工具使用方法](Doc/cmaqprofile.md):
+* [面源清单的offline垂直分配工具使用方法](Doc/cmaqprofile.md):
 
 ...
 
