@@ -10,12 +10,20 @@ ISAT(Inventory Spatial Allocate Tool，排放清单空间分配工具)是基于�
 
 <img src="Doc/fig/流程图.png" alt="流程图" style="zoom:67%;" />
 
+## 更新日志
+
+### 2022年12月1日更新：
+
+1. 延长公开使用时间至2023年12月1日。
+2. 增加[面源清单的inline垂直分配工具](cmaqprofile)。
+
 ## 使用手册
 
 * [快速使用手册](./Doc/Quick_start.md)：以MEIC排放清单为例，简要介绍如何快速使用ISAT来设计模拟网格、清单分配以及构建可以直接输入CMAQ以及CAMx的排放清单文件。
 * [物种分配文件修改]():
 * [时间分配文件修改]():
 * [自定义空间分配因子文件]():
+* [面源清单的inline垂直分配工具使用方法](Doc/cmaqprofile.md):
 
 ...
 
@@ -49,7 +57,7 @@ Kun Wang et al., Pinpointing optimized air quality model performance over the Be
 
 Kun Wang et al., Impacts of LULC, FDDA, Topo-wind and UCM schemes on WRF-CMAQ over the Beijing-Tianjin-Hebei region, Atmospheric Pollution Research, 2021, 12: 292-304
 
-Wang H, Liu Z, Zhang Y, et al. Impact of different urban canopy models on air quality simulation in Chengdu, southwestern China[J]. Atmospheric Environment, 2021, 267: 118775.
+Haofan Wang  et al. Impact of different urban canopy models on air quality simulation in Chengdu, southwestern China[J]. Atmospheric Environment, 2021, 267: 118775.
 
 Kun Wang et al., A comprehensive emissioninventory of multiple air pollutants from iron and steel industry in China:Temporal trends and spatial variation characteristics , Science of the Total Environment, 2016.7.15, 559: 7~14 
 
