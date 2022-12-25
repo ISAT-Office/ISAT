@@ -6,7 +6,7 @@ Inventory Spatial Allocate Tool (ISAT) is a tool for spatially assigning emissio
 2. Highly efficient emission inventory downscaling tool.
 3. Build the emission inventory files which can be entered directly into CMAQ and CAMx model.
 
-**This is the flow chart of this tools. **
+**This is the flow chart of this tools.**
 
 <img src="Doc/fig/流程图.png" alt="流程图" style="zoom:67%;" />
 
