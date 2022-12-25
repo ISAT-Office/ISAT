@@ -1,51 +1,57 @@
 # Inventory Spatial Allocate Tool 
 
-ISAT(Inventory Spatial Allocate Tool，排放清单空间分配工具)是基于城市设施点、人口、道路、土地利用类型等地理信息数据将面源排放清单进行空间分配的工具，实现了如下三项主要功能。
+Inventory Spatial Allocate Tool (ISAT) is a tool for spatially assigning emission inventories based on geographic information data such as urban facility points, population, roads, and land use types and this tool implements the following 3 functions.
 
-1. 自动绘制WRF和AQM网格，确定`namelist.wps`参数。
-2. 高效率的排放清单降尺度工具。
-3. 自动构建可以直接输入CMAQ和CAMx的排放清单文件（面源and点源）。
+1. Automatically draw WRF and AQM grid and determining the parameters in  `namelist.wps` and `namelist.input`.
+2. Highly efficient emission inventory downscaling tool.
+3. Build the emission inventory files which can be entered directly into CMAQ and CAMx model.
 
-具体流程如图所示：
+**This is the flow chart of this tools. **
 
 <img src="Doc/fig/流程图.png" alt="流程图" style="zoom:67%;" />
 
-## 更新日志
+## Update Logs
 
-### 2022年12月1日更新：
+### Dec. 24, 2022:
 
-1. 延长公开使用时间至2023年12月1日。
-2. 增加[面源清单的offline垂直分配工具](cmaqprofile)。
+1. Change the Chinese manual to English manual.
 
-## 使用手册
+### Dec. 1, 2022：
 
-* [快速使用手册](./Doc/Quick_start.md)：以MEIC排放清单为例，简要介绍如何快速使用ISAT来设计模拟网格、清单分配以及构建可以直接输入CMAQ以及CAMx的排放清单文件。
-* [物种分配文件修改]():
-* [时间分配文件修改]():
-* [自定义空间分配因子文件]():
-* [面源清单的offline垂直分配工具使用方法](Doc/cmaqprofile.md):
+1. Extend the public use period to December 1, 2023.
+2. Add [the offline vertical assignment tools](cmaqprofile).
 
-...
+## User Manual
 
-## 关于我们
+* [Quick Start](./Doc/Quick_start.md)：Using the MEIC emission inventory as an example, we briefly describe how to quickly use ISAT to design simulation grids, inventory assignments, and build emission inventory files that can be directly imported into CMAQ and CAMx.
 
-**By**：
+## About Us
 
-***北京市科学技术研究院城市安全与环境科学研究所   王堃  （wkty@mail.bnu.edu.cn）***
+### **This tools is developed By**：
 
-**Team members**:
+* ***Kun Wang (wkty@mail.bnu.edu.cn).***
 
-中国科学院东北地理与农业生态研究所 高超
+***From Institute of urban safety and environmental science, Beijing academy of science and technology, Beijing 100054, China***
 
-中山大学大气科学学院 王浩帆
+### **Team members**:
 
-清华大学 刘开云
+* **Chao Gao**
 
-海南大学 刘姝涵
+***From Key Laboratory of Wetland Ecology and Environment, Northeast Institute of Geography and Agroecology, Chinese Academy of Science, Changchun, 130102, China.***
 
-## 引用
+* **Haofan Wang**
 
-**欢迎引用、讨论作者及所在团队相关论文**：
+***From School of Atmospheric Sciences, Sun Yat-sen University, Zhuhai, Guangdong, China.***
+
+* **Kaiyun Liu**
+
+***From State Key Joint Laboratory of Environment Simulation and Pollution Control, School of Environment, Tsinghua University, Beijing 100084, China***
+
+* **Shuhan Liu**
+
+***From Hainan University.***
+
+## Team Achievements
 
 Kun Wang et al. Unit-based emissions and environmental impacts of industrial condensable particulate matter in China in 2020,Chemosphere ,2022.
 
@@ -70,9 +76,3 @@ Tao Yue; Kun Wang* et al., Emission Characteristics of Hazardous Atmospheric Pol
 Tao Yue;... ; Kun Wang*, Xiang Gao. Environmental Impacts of the Revised Emission Standard of Air Pollutants for Boilers in the Heating Season of Beijing, China. Aerosol & Air Quality Research, 2018.  
 
 Kun Wang, et al. Vehicle emissions calculation for urban roads based on the Macroscopic Fundamental Diagram method and real-time traffic information. Atmospheric and Oceanic Science Letters, 2020, 13(2):1-8.
-
-王堃,高超等. 基于CSGD的排放清单处理工具研究[J]. 环境科学研究, 2019, 32(6):9.
-
-王堃, 高佳佳, 田贺忠,等. 基于POI兴趣点的排放清单空间分配方法[J]. 中国环境科学, 2017, 37(6):6.
-
-王人洁, 王堃等. 中国国道和省道机动车尾气排放特征[J]. 环境科学, 2017, 38(9):8.
