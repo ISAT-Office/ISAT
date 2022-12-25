@@ -1,38 +1,38 @@
-# 手册说明
+# Manual Description
 
-作为中国的首都，北京人口众多，车辆众多，成为中国空气污染研究的热点。本教程呈现了一个三层嵌套域案例的工作流程：中国大陆、京津冀（BTH）和北京（BJ），空间分辨率分别为27、9和3km，如图所示。
+As the capital of China, Beijing has a large population and many vehicles, making it a hot spot for air pollution research in China. This turorial use a triple-nested domains for mainland China, Beijing-Tianjin-Hebei(BTH) and Beijing with spatial resolution of 27, 9 and 3 km, respectively (see Figure).
 
 <img src="fig/快速启动-模拟域示意图.png" alt="快速启动-模拟域示意图" style="zoom:50%;" />
 
-本教程将完成WRF-AQM（CMAQ or CAMx）从设计模拟域到输出能够直接输入AQM的排放清单的所有工作。
+This tutorial will finish a complete workflow of WRF-AQM (CMAQ or CAMx) base on ISAT.
 
-# 工具说明
+# Tool Description
 
 * **prepgrid**
 
-根据shapefile文件绘制模拟嵌套域并绘制模拟网格，输出WRF中`namelist.wps`以及`namelist.input`中的相关参数。
+Design the simulation nested domain and draw the simulation grid according to the shapefile file, and output the parameters in `namelist.wps` and `namelist.input` in WRF.
 
 * **downscale**
 
-基于输入排放因子数据库（道路、人口等）降尺度粗分辨率排放清单。
+Downscale coarse resolution emission inventories based on a database of emission factors (roads, population, etc.).
 
 * **mapinv**
 
-将降尺度后的排放清单映射到模拟网格中，此部分输出文件可以提供给prepmodel。
+Map the downscaled emission inventory is to the simulation grid and this part of the output file can be provided to prepmodel.
 
 * **prepmodel**
 
-将csv文件转换为可以直接输入到CMAQ模型中的排放清单文件，此过程涉及时间分配和物种分配。
+The process of converting *csv* files into emission inventory files that can be directly imported into the CMAQ model.
 
-# 开始
+# Start
 
-本案例运行环境为Windows 10.
+System: Windows 10 or Linux
 
-## Step 1：绘制模拟嵌套域
+## Step 1: Draw simulation nested domains
 
-此部分采用`prepgrid`进行。
+This section is based on `prepgrid`.
 
-首先进入`prepgrid.exe`可执行程序所在目录，然后配置`par.ini`文件。
+Go to the directory where the `prepgrid.exe` executable is located, and then configure the `par.ini` file.
 
 ```ini
 [projection]
@@ -59,54 +59,13 @@ domname:china,JJJ,beijing
 model_clip:1,1,1
 ```
 
-`par.ini`参数说明：
-
---------------------------------------
-
-[projection]
-
-**lat1, lat2:** 标准纬度1和标准纬度2。**此参数将被用于WRF模型namelist.wps中的`TRUELAT1`和`TRUELAT2`**。
-
-[domain]
-
-**casename:** 案例名称，影响输出文件命名。
-
-**numdom:** 嵌套层数，本案例中设置3层嵌套，因此设置为3。
-
-**shpath:** 分别为第一层嵌套，第二层嵌套以及第三层嵌套的shapefile文件。
-
-**dx:** 分辨率。
-
-**xladd,xradd,ytadd,ydadd:** 该工具会以输入的shapefile文件的范围为基准创建WRF网格，此处四个参数分为为在shapefile文件的最大范围基准上，向左，向右，向上和向下分别增加的网格数量。此处的设置可以解释为，在第一层嵌套四周均增加2个网格，在第二层和第三层的四周均增加3个网格。
-
-**domname:** 分别为第一层嵌套，第二层嵌套以及第三层嵌套的嵌套域名称，影响输出文件命名。
-
-**model_clip:** 创建一个CMAQ网格，此网格在WRF网格的基础上裁剪的网格数量。此处可以解释为CMAQ网格会在原始网格的四周均裁剪掉1个网格，作为CMAQ网格。
-
------------------------------
-
-**部分标准纬度的设置方法见下图**：
-
-| 序号 | 适用省区                                  | 第一标准纬度 | 第二标准纬度 | 最大长度形变 |
-| :--: | ----------------------------------------- | ------------ | ------------ | ------------ |
-|  1   | 黑龙江                                    | 45           | 52.5         | 0.2%         |
-|  2   | 吉林、辽宁                                | 40           | 45.5         | 0.2%         |
-|  3   | 内蒙古                                    | 39           | 46           | 0.4%         |
-|  4   | 河北、山东、山西、陕西、甘肃、宁夏z、青海 | 33           | 42           | 0.3%         |
-|  5   | 新疆                                      | 36.5         | 48           | 0.5%         |
-|  6   | 湖北、江苏、安徽、河南                    | 30           | 35.5         | 0.1%         |
-|  7   | 四川、西藏                                | 27.5         | 35           | 0.2%         |
-|  8   | 湖南、浙江、福建、江西、贵州              | 25           | 30.5         | 0.2%         |
-|  9   | 云南                                      | 22           | 28.5         | 0.3%         |
-|  10  | 广东、广西、台湾                          | 21           | 25.5         | 0.2%         |
-
-配置`par.ini`文件以后，在终端中输入以下命令开始运行。
+After configuring the `par.ini` file, enter the following command in the terminal to run the program.
 
 ```shell
 ./prepgrid.exe
 ```
 
-如果在屏幕中显示了类似如下命令，则说明运行成功。
+If a print message similar to the following is displayed on the screen, the program has run successfully.
 
 ```
 Prepgrid tool for allocating regional emissions, created  by Kun Wang from IUSE Beijing in 2022.
@@ -133,18 +92,18 @@ clip x or y direction by 1 grid
 finish
 ```
 
-此处打印信息中的第二行：`LCC projection:  mid lon:102.07366854247363,mid lat:36.68731137325006`分别为**中心经度**和**中心纬度**。
+The second line of the printed information here: `LCC projection: mid lon:102.07366854247363,mid lat:36.68731137325006` are **central longitude** and **central latitude** respectively.
 
-此外，你可以在`output`目录下面看到系列输出文件：
+In addition, you can see the series output files in the `output` directory.
 
 ```
 ├── 3nestdomain_gridinfo.csv
-├── aqmJJJ.csv ---- D02的CMAQ网格信息，将会被用到mapinv中
+├── aqmJJJ.csv ---- CMAQ grid information of D02, will be used in mapinv.
 ├── aqm_JJJ.shp
 ├── aqm_beijing.shp
 ├── aqm_china.shp 
-├── aqmbeijing.csv ---- D03的CMAQ网格信息，将会被用到mapinv中
-├── aqmchina.csv ---- D01的CMAQ网格信息，将会被用到mapinv中
+├── aqmbeijing.csv ---- CMAQ grid information of D03, will be used in mapinv.
+├── aqmchina.csv ---- CMAQ grid information of D01, will be used in mapinv.
 ├── wrf_JJJ.csv
 ├── wrf_JJJ.shp
 ├── wrf_beijing.csv
@@ -153,19 +112,19 @@ finish
 ├── wrf_china.shp
 ```
 
-其中`aqm*.csv`文件和`wrf_*.csv`文件都是详细的网格信息，其中`aqm*.csv`将会被使用到`mapinv`程序中，此外`*_gridinfo.csv`为WRF的`namelist.wps`中的设置参数，具体的映射关系如图所示。
+The `aqm*.csv` files and the `wrf_*.csv` files are both detailed grid information, where `aqm*.csv` will be used in the `mapinv` program, and `*_gridinfo.csv` is the parameters in `namelist.wps`, and the specific mapping relationship is shown in the figure.
 
 <img src="fig/gridinfo文件映射.png" alt="gridinfo文件映射" style="zoom:100%;" />
 
-输出结果的可视化可以直接通过`*.shp`文件来实现，如图所示为此次运行所绘制的网格。
+The visualization of the output can be done directly through the `*.shp` files.
 
 <img src="fig/网格示意图.png" alt="网格示意图" style="zoom:80%;" />
 
-## Step 2：降尺度排放清单
+## Step 2: Downscaled Emissions Inventory
 
-此部分采用`downscale`进行。
+This section is based on `downscale`.
 
-首先进入`downscale.exe`可执行程序所在目录，然后配置`par.ini`文件。
+Go to the directory where the `downscale.exe` executable is located, and then configure the `par.ini` file.
 
 ```ini
 [preinv]
@@ -178,61 +137,59 @@ emissions:./regioninv/agricultureannual.csv,./regioninv/transportationannual.csv
 method:area,road,pop
 ```
 
-`par.ini`参数说明：
+parameter description of `par.ini`:
 
 -------------------------
 
-**invf**：网格信息 **由`prepgrid.exe`输出的网格信息文件。**
+**invf**: Grid information. **Grid information file exported by `prepgrid.exe`. **
 
-**dx**：网格大小
+**dx**: Grid resolution.
 
-**ratio**：次网格比例（3km以上建议采用3，以下建议采用1）
+**ratio**: Sub-grid ratio (3 is recommended above 3km, 1 is recommended below).
 
-**casename**：清单名称
+**casename**: Case name.
 
-**emission**：区域清单文件 **需要通过MEIC清单自行创建，具体的操作方法见[MEIC的区域清单文件创建手册]()。**
+**emission**: Regional inventory file.
 
-**method**：分配方法 **可选择`[area, road, pop]`分别是面积分配、道路分配和人口分配。**
+**method**：Allocation Method. **Optional `[area, road, pop]` are area allocation, road allocation, and population allocation, respectively.**
 
 ---------------------
 
-配置`par.ini`文件以后，在终端中输入以下命令开始运行。
+After configuring the `par.ini` file, enter the following command in the terminal to start running.
 
 ```shell
 ./downscale.exe
 ```
 
-如果程序没有出现报错则说明运行成功。
+If no error is reported, the program runs successfully.
 
 ---------------------------
 
-**以下列出了此过程中可能会出现的报错：**
+**The following is a list of errors that may occur during this process:**
 
 1. `FileNotFoundError: [Errno 2] No such file or directory: b'./input/Temp/tempMEIC.nc'`
 
-解决办法：将已有的任意MEIC清单的nc格式文件，重命名为`tempMEIC.nc`并移动到`./input/Temp`目录中。
+Solution: Rename the existing nc format file of any MEIC list to `tempMEIC.nc` and move it to `. /input/Temp` directory.
 
 2. `OSError: Cannot save file into a non-existent directory: 'output\sa'`
 
-解决办法：在`output\`目录中手动创建`sa\`目录。
+Solution: Create the `sa\` directory manually in the `output\` directory.
 
 3. `FileNotFoundError: [Errno 2] No such file or directory: b'./input/SA/popchina1km.nc'`
 
-解决办法：将`./input/SA/popchina3km.nc`重命名为`./input/SA/popchina1km.nc`.
+Solution: Rename `. /input/SA/popchina3km.nc` to `. /input/SA/popchina1km.nc`.
 
 --------------------
 
-如图所示是不同`ratio`下的清单分配结果。
+The figure shows the result of list allocation under different `ratio`.
 
 <img src="fig/不同ratio下的降尺度结果.png" alt="不同ratio下的降尺度结果" style="zoom:67%;" />
 
-## Step 3：准备可以直接输入CMAQ的排放清单文件
+## Step 3: Prepare the emission inventory file
 
-### Step 3.1 面源清单建立
+This section is based on `prepmodel`.
 
-此部分采用`prepmodel`进行。
-
-首先进入`area_inlinenew.exe`可执行程序所在目录，然后配置`par.ini`文件。
+Go to the directory where the `area_inlinenew.exe` executable is located, and then configure the `par.ini` file.
 
 ```ini
 #
@@ -255,34 +212,26 @@ emissions: ./src/emissions/3kmMY/AR.csv,./src/emissions/3kmMY/AG.csv,./src/emiss
 #stack_groups: ./src/emissions/WK/STACK_GROUP_PP.csv,./src/emissions/WK/STACK_GROUP_BL.csv,./src/emissions/WK/STACK_GROUP_CE.csv,./src/emissions/WK/STACK_GROUP_CO.csv,./src/emissions/WK/STACK_GROUP_IS.csv,./src/emissions/WK/STACK_GROUP_NH.csv,./src/emissions/WK/STACK_GROUP_PT.csv,./src/emissions/WK/STACK_GROUP_SI.csv,./src/emissions/WK/STACK_GROUP_VO.csv,./src/emissions/WK/STACK_GROUP_VP.csv,./src/emissions/WK/STACK_GROUP_VU.csv,./src/emissions/WK/STACK_GROUP_CPMO.csv,./src/emissions/WK/STACK_GROUP_CPMI.csv,./src/emissions/WK/STACK_GROUP_AL.csv,./src/emissions/WK/STACK_GROUP_YL.csv,./src/emissions/WK/STACK_GROUP_GL.csv,./src/emissions/WK/STACK_GROUP_BK.csv,./src/emissions/WK/STACK_GROUP_HS.csv,./src/emissions/WK/STACK_GROUP_LM.csv,./src/emissions/WK/STACK_GROUP_RM.csv
 ```
 
-`par.ini`参数说明：
+parameter description of `par.ini`:
 
 ---------------------
 
-**runtime**: 清单的时间长度，单位小时。
+**runtime**: Length of inventory. (unit: hour)
 
-**gridcro2d**：GRIDCRO2D文件路径。
+**gridcro2d**：The path of GRIDCRO2D file.
 
-**speciate**：物种分配谱文件所在路径。
+**speciate**: The path where the species assignment spectrum file is located.
 
-**temporary_hour** : 一天内逐小时时间分配谱文件路径。
+**temporary_***: Time allocation spectrum file path.
 
-**temporary_week** : 一周内逐日时间分配谱文件路径。
-
-**temporary_month**: 一年内逐月时间分配谱文件路径。
-
-**emissions**：***Step 2***的输出文件所在路径，需要与**物种分配文件**呈一一对应关系。
+**emissions**: The path where the output file of **Step. 2** is located needs to be in one-to-one correspondence with the **species allocation file**.
 
 ---------------------------------
 
-配置`par.ini`文件以后，在终端中输入以下命令开始运行。
+After configuring the `par.ini` file, enter the following command in the terminal to start running.
 
 ```shell
 ./area_inlinenew.exe
 ```
 
-如果程序没有出现报错则说明运行成功。
-
-### Step 3.2 点源清单建立
-
-点源采用inline清单格式可用于CMAQ以及CAMx。该部分相较于以往模块没有大的改动，主要改动在于只要更改物种分配谱之后就可以更改整个模型的物种分配过程，无需改动代码内部的相关信息。主要使用步骤与之前版本没有差异。
+If no error is reported, the program runs successfully.
